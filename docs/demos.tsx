@@ -56,7 +56,7 @@ export function InputDemo() {
         <Input id="demo-name" placeholder="Ada" />
       </Field>
       <Field label="Bio" htmlFor="demo-bio" hint="Markdown">
-        <Textarea id="demo-bio" placeholder="Ceritakan." />
+        <Textarea id="demo-bio" placeholder="Tell us about yourself." />
       </Field>
     </div>
   )

@@ -1,12 +1,12 @@
 # artcraft-ui
 
-Design system komponen React yang diekstrak dari [getartcraft.com](https://getartcraft.com/apps). Kompatibel dengan konvensi [shadcn/ui](https://ui.shadcn.com) (`new-york`, RSC, TSX, `@/` alias, lucide).
+A React component design system extracted from [getartcraft.com](https://getartcraft.com/apps). Compatible with [shadcn/ui](https://ui.shadcn.com) conventions (`new-york`, RSC, TSX, `@/` alias, lucide).
 
-Bukan paket npm. Cara pakainya menyalin file, sama seperti shadcn: kamu yang memiliki kodenya.
+Not an npm package. You use it by copying files, same as shadcn: you own the code.
 
-## Karakter visual
+## Visual character
 
-Tokennya diambil langsung dari CSS bundle situs aslinya, bukan dikarang.
+The tokens come straight from the site's CSS bundle, not invented.
 
 | Token | Light | Dark |
 | --- | --- | --- |
@@ -16,33 +16,33 @@ Tokennya diambil langsung dari CSS bundle situs aslinya, bukan dikarang.
 | `--accent` | `#2d81ff` | — |
 | `--radius` | `0` | `0` |
 
-- Radius selalu `0`. Tidak ada sudut membulat di seluruh kit.
-- Sudut section memakai crop mark (`Tick`), isi section dikurung `Frame` dengan garis vertikal.
-- Teks mikro memakai `Label` (monospace 10px, uppercase, `tracking-[0.1em]`). Ini suara HUD situsnya.
-- Font: `Archivo` (display), `Inter` (body), `Instrument Serif` (serif aksen), `Geist Mono` (monospace).
-- Grid pemisah antar kartu memakai trik `gap-px bg-border` supaya garis jadi 1px tanpa border ganda.
+- Radius is always `0`. There are no rounded corners anywhere in the kit.
+- Section corners use crop marks (`Tick`); section bodies are enclosed by `Frame` with vertical rules.
+- Micro text uses `Label` (monospace 10px, uppercase, `tracking-[0.1em]`). This is the site's HUD voice.
+- Fonts: `Archivo` (display), `Inter` (body), `Instrument Serif` (accent serif), `Geist Mono` (monospace).
+- The divider grid between cards uses the `gap-px bg-border` trick so lines read as 1px without doubled borders.
 
-## Prasyarat
+## Requirements
 
 - React 19
-- Next.js 15 (opsional, komponen RSC-safe) atau Vite + react-router
+- Next.js 15 (optional, components are RSC-safe) or Vite + react-router
 - Tailwind CSS v4
 - TypeScript
 
-## Instalasi
+## Installation
 
-### 1. Dependensi
+### 1. Dependencies
 
 ```bash
 npm install clsx tailwind-merge class-variance-authority lucide-react @radix-ui/react-slot
 npm install -D tailwindcss @tailwindcss/vite tw-animate-css typescript @types/react
 ```
 
-### 2. Token warna dan font
+### 2. Color tokens and fonts
 
-Salin `app/globals.css` ke project. Isinya `@import "tailwindcss"`, `@custom-variant dark`, blok `:root` / `.dark`, dan `@theme inline` yang memetakan variabel ke utility Tailwind (`bg-background`, `text-foreground`, `border-border`, `text-accent-foreground`, dan seterusnya).
+Copy `app/globals.css` into your project. It contains `@import "tailwindcss"`, the `@custom-variant dark` declaration, the `:root` / `.dark` blocks, and the `@theme inline` map that wires variables to Tailwind utilities (`bg-background`, `text-foreground`, `border-border`, `text-accent-foreground`, and so on).
 
-Untuk Vite, import dari entry:
+For Vite, import it from your entry:
 
 ```ts
 import "@/globals.css"
@@ -61,13 +61,13 @@ import "@/globals.css"
 }
 ```
 
-Vite menambahkan resolve alias:
+For Vite, add the resolve alias:
 
 ```ts
 resolve: { alias: { "@": path.resolve(__dirname, "./src") } }
 ```
 
-### 4. Salin komponen
+### 4. Copy the components
 
 ```bash
 cp -r artcraft-ui/components/ui        src/components/ui
@@ -77,7 +77,7 @@ cp -r artcraft-ui/components/dashboard src/components/dashboard
 cp    artcraft-ui/lib/utils.ts         src/lib/utils.ts
 ```
 
-### 5. Selesai
+### 5. Done
 
 ```ts
 import { Button } from "@/components/ui/button"
@@ -86,9 +86,9 @@ import { DataTable } from "@/components/cms/data-table"
 import { AdminShell } from "@/components/dashboard/admin-shell"
 ```
 
-## Konfigurasi registry (opsional)
+## Registry config (optional)
 
-`components.json` sudah disiapkan supaya CLI shadcn mengenali struktur ini kalau nanti kit dipublikasikan sebagai registry:
+`components.json` is already set up so the shadcn CLI recognizes this structure if the kit is later published as a registry:
 
 ```json
 {
@@ -101,34 +101,34 @@ import { AdminShell } from "@/components/dashboard/admin-shell"
 }
 ```
 
-## Katalog komponen
+## Component catalog
 
-`components/ui` — primitif
+`components/ui` — primitives
 `Button` · `Badge` · `Card` · `Input` / `Textarea` · `Label` · `Field` / `FieldLabel` · `Table` · `Navbar` / `Footer` · `Frame` / `Tick` / `Eyebrow` / `SectionHeading` / `Lead`
 
-`components/landing` — blok halaman publik
+`components/landing` — public page blocks
 `Hero` · `AppGrid` / `AppCard` · `Features` / `CtaBand`
 
-`components/cms` — alat authoring
+`components/cms` — authoring tools
 `DataTable` / `StatusPill` · `EditorLayout` / `ContentRow` / `EditorSidebar`
 
-`components/dashboard` — console admin
+`components/dashboard` — admin console
 `AdminShell` · `StatCard` / `BarSeries` · `ActivityFeed`
 
-Panduan pemakaian lengkap per komponen, dengan contoh dan tabel props, ada di `app/docs/page.tsx`.
+Full per-component usage, with examples and props tables, lives in `docs/DocsPage.tsx`.
 
-## Verifikasi
+## Verification
 
 ```bash
 npm run typecheck
 ```
 
-## Catatan
+## Notes
 
-- `"use client"` hanya ada di komponen yang benar-benar butuh state (`Navbar`, `DataTable`, `AdminShell`). Sisanya server-renderable.
-- `BarSeries` sengaja tanpa dependensi chart. Ganti ke library kalau butuh sumbu dan zoom.
-- Semua komponen menerima `className` dan di-merge lewat `cn()` (clsx + tailwind-merge), jadi override utility Tailwind tetap aman urutannya.
+- `"use client"` appears only in components that genuinely need state (`Navbar`, `DataTable`, `AdminShell`). Everything else is server-renderable.
+- `BarSeries` deliberately ships with no chart dependency. Swap in a library when you need axes and zoom.
+- Every component accepts `className` and merges it through `cn()` (clsx + tailwind-merge), so Tailwind utility overrides always win in the right order.
 
-## Lisensi
+## License
 
 MIT.

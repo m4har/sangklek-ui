@@ -23,7 +23,7 @@ const BLOCKS: Block[] = [
     props: [
       { name: "variant", type: 'default | "outline" | "secondary" | "ghost" | "destructive" | "link"' },
       { name: "size", type: 'default | "sm" | "lg" | "icon"' },
-      { name: "asChild", type: "boolean", note: "Slot Radix untuk wrap link" },
+      { name: "asChild", type: "boolean", note: "Radix Slot to wrap a link" },
     ],
     code: `import { Button } from "@/components/ui/button"
 
@@ -35,7 +35,7 @@ const BLOCKS: Block[] = [
   },
   {
     title: "Badge",
-    desc: "Pill monospace 10px uppercase. Default ke outline.",
+    desc: "Pill monospace 10px uppercase. Defaults to outline.",
     props: [
       { name: "variant", type: '"default" | "outline" | "accent"' },
     ],
@@ -59,7 +59,7 @@ const BLOCKS: Block[] = [
   },
   {
     title: "Label / Field",
-    desc: "Label = HUD mikro. Field menyatukan label, hint, dan error.",
+    desc: "Label = micro HUD text. Field groups label, hint, and error.",
     props: [
       { name: "Field.label", type: "string" },
       { name: "Field.hint", type: "ReactNode" },
@@ -76,12 +76,12 @@ import { Input } from "@/components/ui/input"
   },
   {
     title: "Card",
-    desc: "Komponen komposisi bebas. Garis 1px, radius 0.",
+    desc: "Free-composition component. 1px rules, radius 0.",
     props: [
       { name: "Card", type: "container" },
-      { name: "CardHeader / Title / Description", type: "blok" },
-      { name: "CardContent", type: "blok bebas" },
-      { name: "CardFooter", type: "baris aksi" },
+      { name: "CardHeader / Title / Description", type: "block" },
+      { name: "CardContent", type: "free block" },
+      { name: "CardFooter", type: "action row" },
     ],
     code: `import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
@@ -93,10 +93,10 @@ import { Input } from "@/components/ui/input"
   },
   {
     title: "Table",
-    desc: "Primitif table, dipakaikan lewat DataTable di lapisan CMS.",
+    desc: "Primitive table, used through DataTable in the CMS layer.",
     props: [
-      { name: "TableHeader / TableBody / TableRow", type: "struktur" },
-      { name: "TableHead / TableCell", type: "sel" },
+      { name: "TableHeader / TableBody / TableRow", type: "structure" },
+      { name: "TableHead / TableCell", type: "cell" },
     ],
     code: `import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table"
 
@@ -139,10 +139,10 @@ import { Input } from "@/components/ui/input"
   },
   {
     title: "StatCard / BarSeries",
-    desc: "KPI + grafik batang tanpa dependensi.",
+    desc: "KPI tile + bar chart with no dependencies.",
     props: [
       { name: "StatCard.value", type: "string | number" },
-      { name: "StatCard.delta", type: "number", note: "persen, tanda +/−" },
+      { name: "StatCard.delta", type: "number", note: "percent, +/− sign" },
       { name: "BarSeries.data", type: "SeriesPoint[]" },
       { name: "BarSeries.height", type: "number" },
     ],
@@ -168,7 +168,7 @@ import { Input } from "@/components/ui/input"
     demo: (
       <Card className="max-w-md">
         <CardHeader><CardTitle>Sticky layout</CardTitle></CardHeader>
-        <CardContent>Di layar di bawah 1024px, sidebar jadi off-canvas drawer dengan tombol hamburger. Di desktop ia sticky full-height.</CardContent>
+        <CardContent>Below 1024px the sidebar becomes an off-canvas drawer opened with the hamburger button. On desktop it stays sticky at full height.</CardContent>
       </Card>
     ),
   },
@@ -180,10 +180,10 @@ export default function DocsPage() {
       <Frame>
         <Eyebrow index="00" label="ArtCraft UI" meta="Reference" />
         <div className="px-6 py-12 md:px-10 md:py-16">
-          <SectionHeading>Kit komponen, pakai langsung.</SectionHeading>
+          <SectionHeading>A component kit, ready to use.</SectionHeading>
           <Lead className="mt-4">
-            Ekstrak dari getartcraft.com. Radius 0, crop mark, HUD monospace. Semua komponen menerima
-            className via cn() dan aman untuk Tailwind utility.
+            Extracted from getartcraft.com. Radius 0, crop marks, HUD monospace. Every component accepts
+            className via cn() and is safe to override with Tailwind utilities.
           </Lead>
         </div>
       </Frame>
