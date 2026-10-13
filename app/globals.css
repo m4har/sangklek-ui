@@ -1,0 +1,77 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ArtCraft tokens, extracted from getartcraft.com/apps (computed CSS). */
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #f2f1ee;
+  --card: #faf9f7;
+  --muted: #e9e8e4;
+  --foreground: #101014;
+  --muted-foreground: #1010149e;
+  --border: #10101429;
+  --input: #10101466;
+  --ring: #2d81ff;
+  --primary: #101014;
+  --primary-foreground: #f2f1ee;
+  --secondary: #e9e8e4;
+  --secondary-foreground: #101014;
+  --accent: #2d81ff;
+  --accent-foreground: #1659c4;
+  --destructive: #b3261e;
+  --destructive-foreground: #faf9f7;
+  --radius: 0rem;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+}
+
+.dark {
+  --background: #121316;
+  --card: #101014;
+  --muted: #060607;
+  --foreground: #f2f1ee;
+  --muted-foreground: #f2f1ee99;
+  --border: #f2f1ee26;
+  --input: #f2f1ee66;
+  --ring: #2d81ff;
+  --primary: #f2f1ee;
+  --primary-foreground: #0b0b0c;
+  --secondary: #060607;
+  --secondary-foreground: #f2f1ee;
+  --accent: #2d81ff;
+  --accent-foreground: #74aaff;
+  --destructive: #ff6259;
+  --destructive-foreground: #101014;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --radius-none: 0rem;
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground font-sans antialiased; }
+}
