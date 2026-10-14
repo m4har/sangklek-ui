@@ -157,7 +157,23 @@ Full per-component usage, with examples and props tables, lives in `docs/DocsPag
 
 ## Screenshots
 
-Screenshots are in `docs/screenshots/` (landing page, components, rule rail, console).
+Landing page and component docs, generated from `artcraft-app` by `scripts/shots.mjs`:
+
+**Landing** (`/`)
+
+![Landing page](docs/screenshots/landing.png)
+
+**Components** (`/docs`)
+
+![Component docs](docs/screenshots/components.png)
+
+**Rule rail with hover readout** (right edge, cm ticks + crosshair)
+
+![Rule rail](docs/screenshots/rule-rail.png)
+
+**Admin console** (`/cms`)
+
+![Admin console](docs/screenshots/console.png)
 
 ## Verification
 
