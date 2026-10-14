@@ -200,7 +200,7 @@ function Rule({
           ) : null}
         </span>
       ))}
-      {mids.map(({ n, v }) => (
+      {mids.map(({ n }) => (
         <span
           key={`d${n}`}
           aria-hidden="true"
