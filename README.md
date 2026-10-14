@@ -86,9 +86,47 @@ import { DataTable } from "@/components/cms/data-table"
 import { AdminShell } from "@/components/dashboard/admin-shell"
 ```
 
+## Install via shadcn CLI (from GitHub)
+
+The repo ships a root `registry.json`, so the shadcn CLI installs items straight from GitHub. No server, no npm publish, and no build step.
+
+Address format: `m4har/sangklek-ui/<item>`
+
+```bash
+# List every item
+npx shadcn@latest list m4har/sangklek-ui
+
+# Preview before writing files
+npx shadcn@latest add m4har/sangklek-ui/button --dry-run
+
+# Install one item (dependencies such as utils come along automatically)
+npx shadcn@latest add m4har/sangklek-ui/button
+
+# Install several at once
+npx shadcn@latest add m4har/sangklek-ui/rule m4har/sangklek-ui/rule-rail m4har/sangklek-ui/card
+```
+
+Items and their target paths (`@ui/`, `@lib/`, `@components/` resolve from your `components.json` aliases):
+
+| Item | Type | Installs to |
+| --- | --- | --- |
+| `utils` | lib | `@lib/utils.ts` |
+| `button`, `badge`, `card`, `input`, `label`, `field`, `table`, `skeleton`, `section`, `navbar` | ui | `@ui/<name>.tsx` |
+| `rule`, `rule-rail` | ui | `@ui/rule.tsx`, `@ui/rule-rail.tsx` |
+| `globals-css` | file | `app/globals.css` (tokens, fonts, shimmer keyframes) |
+
+Requirements for CLI install: a `components.json` in the project (`npx shadcn@latest init` creates it), and the `@/` alias in `tsconfig`. Keep `globals-css` as the base stylesheet before adding components.
+
+Local dev check of the registry:
+
+```bash
+npx shadcn@latest registry validate ./registry.json
+npx shadcn@latest build registry.json --output public/r   # optional static JSON
+```
+
 ## Registry config (optional)
 
-`components.json` is already set up so the shadcn CLI recognizes this structure if the kit is later published as a registry:
+`components.json` is already set up so the shadcn CLI recognizes this structure:
 
 ```json
 {
@@ -104,7 +142,7 @@ import { AdminShell } from "@/components/dashboard/admin-shell"
 ## Component catalog
 
 `components/ui` — primitives
-`Button` · `Badge` · `Card` · `Input` / `Textarea` · `Label` · `Field` / `FieldLabel` · `Table` · `Navbar` / `Footer` · `Frame` / `Tick` / `Eyebrow` / `SectionHeading` / `Lead` · `Rule` (cm/inch industrial ruler)
+`Button` · `Badge` · `Card` · `Input` / `Textarea` · `Label` · `Field` / `FieldLabel` · `Table` · `Navbar` / `Footer` · `Frame` / `Tick` / `Eyebrow` / `SectionHeading` / `Lead` · `Rule` (cm/inch industrial ruler, horizontal or vertical) · `RuleRail` (fixed right rail, gridcraft-style) · `Skeleton` / `SkeletonText` (shimmer)
 
 `components/landing` — public page blocks
 `Hero` · `AppGrid` / `AppCard` · `Features` / `CtaBand`
@@ -117,11 +155,17 @@ import { AdminShell } from "@/components/dashboard/admin-shell"
 
 Full per-component usage, with examples and props tables, lives in `docs/DocsPage.tsx`.
 
+## Screenshots
+
+Screenshots are in `docs/screenshots/` (landing page, components, rule rail, console).
+
 ## Verification
 
 ```bash
 npm run typecheck
 ```
+
+Install from GitHub was verified in an empty Vite + React + TS project: `shadcn add m4har/sangklek-ui/<items>` → `tsc -b` exit 0 → `vite build` exit 0.
 
 ## Notes
 
