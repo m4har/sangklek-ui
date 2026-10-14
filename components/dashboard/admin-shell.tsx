@@ -120,10 +120,17 @@ function AdminShell({
         </header>
         {ruleUnit ? (
           <div className="sticky top-12 z-20 border-b border-border bg-background/95 backdrop-blur-sm">
-            <Rule unit={ruleUnit} trackCursor className="mx-auto w-full max-w-[1280px] border-x border-border" />
+            <Rule unit={ruleUnit} trackCursor scrollTarget="self" className="mx-auto w-full max-w-[1280px] border-x border-border" />
           </div>
         ) : null}
-        <main className="flex-1 p-6">{children}</main>
+        <div className="flex flex-1">
+          {ruleUnit ? (
+            <div className="sticky top-[calc(3rem+1px)] hidden h-[calc(100vh-3rem-1px)] w-[18px] shrink-0 self-start border-r border-border bg-background/95 xl:block">
+              <Rule unit={ruleUnit} orientation="vertical" trackCursor scrollTarget="self" className="h-full" />
+            </div>
+          ) : null}
+          <main className="min-w-0 flex-1 p-6">{children}</main>
+        </div>
         <Label className="border-t border-border px-6 py-3 text-muted-foreground/60">{brand} · admin</Label>
       </div>
     </div>
