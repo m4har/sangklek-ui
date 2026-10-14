@@ -1,4 +1,4 @@
-# artcraft-ui
+# sengklek-ui
 
 A React component design system extracted from [getartcraft.com](https://getartcraft.com/apps). Compatible with [shadcn/ui](https://ui.shadcn.com) conventions (`new-york`, RSC, TSX, `@/` alias, lucide).
 
@@ -70,11 +70,11 @@ resolve: { alias: { "@": path.resolve(__dirname, "./src") } }
 ### 4. Copy the components
 
 ```bash
-cp -r artcraft-ui/components/ui        src/components/ui
-cp -r artcraft-ui/components/landing   src/components/landing
-cp -r artcraft-ui/components/cms       src/components/cms
-cp -r artcraft-ui/components/dashboard src/components/dashboard
-cp    artcraft-ui/lib/utils.ts         src/lib/utils.ts
+cp -r sengklek-ui/components/ui        src/components/ui
+cp -r sengklek-ui/components/landing   src/components/landing
+cp -r sengklek-ui/components/cms       src/components/cms
+cp -r sengklek-ui/components/dashboard src/components/dashboard
+cp    sengklek-ui/lib/utils.ts         src/lib/utils.ts
 ```
 
 ### 5. Done
