@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Rule } from "@/components/ui/rule"
+import { RuleRail } from "@/components/ui/rule-rail"
 import { Skeleton, SkeletonText } from "@/components/ui/skeleton"
 import {
   ButtonDemo, BadgeDemo, InputDemo, CardDemo, TableDemo,
@@ -197,7 +198,10 @@ import { Input } from "@/components/ui/input"
 <Rule unit="in" trackCursor className="border-x border-border" />
 
 // Vertical rail that mirrors the page scroll position
-<Rule unit="cm" orientation="vertical" scrollTarget="self" />`,
+<Rule unit="cm" orientation="vertical" scrollTarget="self" />
+
+// Fixed right rail, gridcraft-style: doc-length ticks, accent needle, hover readout
+<RuleRail side="right" unit="cm" topOffset={49} trackCursor />`,
     demo: (
       <div className="flex flex-col gap-6">
         <div>
@@ -216,6 +220,7 @@ import { Input } from "@/components/ui/input"
           <p className="max-w-xs text-sm text-muted-foreground">
             Vertical rule bound to <code className="font-mono text-xs">scrollTarget="self"</code>: the accent origin marker
             and cm readout ride along with the scroll position of the overflow ancestor.
+            The fixed <code className="font-mono text-xs">RuleRail</code> (layout + console) covers the whole page instead.
           </p>
         </div>
       </div>

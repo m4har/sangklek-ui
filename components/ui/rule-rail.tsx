@@ -124,7 +124,7 @@ function RuleRail({
       onMouseMove={trackCursor ? (e) => setCursorY(e.clientY) : undefined}
       onMouseLeave={trackCursor ? () => setCursorY(null) : undefined}
       style={{ ...edge, width: 60 }}
-      className={cn("fixed inset-y-0 z-40 cursor-crosshair select-none overflow-hidden", className)}
+      className={cn("fixed inset-y-0 z-30 hidden cursor-crosshair select-none overflow-hidden md:block", className)}
       {...props}
     >
       <div

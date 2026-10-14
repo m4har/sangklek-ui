@@ -4,6 +4,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 import { Rule } from "@/components/ui/rule"
+import { RuleRail } from "@/components/ui/rule-rail"
 
 export type SidebarItem = { label: string; href: string; icon?: React.ReactNode; active?: boolean }
 
@@ -123,14 +124,8 @@ function AdminShell({
             <Rule unit={ruleUnit} trackCursor scrollTarget="self" className="mx-auto w-full max-w-[1280px] border-x border-border" />
           </div>
         ) : null}
-        <div className="flex flex-1">
-          {ruleUnit ? (
-            <div className="sticky top-[calc(3rem+1px)] hidden h-[calc(100vh-3rem-1px)] w-[18px] shrink-0 self-start border-r border-border bg-background/95 xl:block">
-              <Rule unit={ruleUnit} orientation="vertical" trackCursor scrollTarget="self" className="h-full" />
-            </div>
-          ) : null}
-          <main className="min-w-0 flex-1 p-6">{children}</main>
-        </div>
+        {ruleUnit ? <RuleRail side="right" unit={ruleUnit} topOffset={49} trackCursor /> : null}
+        <main className="min-w-0 flex-1 p-6">{children}</main>
         <Label className="border-t border-border px-6 py-3 text-muted-foreground/60">{brand} · admin</Label>
       </div>
     </div>
