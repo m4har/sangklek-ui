@@ -64,6 +64,19 @@ function RuleRail({
     }
   }, [])
 
+  // Hide the native page scrollbar only while the rail is actually visible (md+).
+  React.useEffect(() => {
+    const root = document.documentElement
+    const mq = window.matchMedia("(min-width: 768px)")
+    const sync = () => (mq.matches ? root.setAttribute("data-rule-rail", "") : root.removeAttribute("data-rule-rail"))
+    sync()
+    mq.addEventListener("change", sync)
+    return () => {
+      mq.removeEventListener("change", sync)
+      root.removeAttribute("data-rule-rail")
+    }
+  }, [])
+
   React.useEffect(() => {
     const onScroll = () => setScrollY(window.scrollY)
     onScroll()

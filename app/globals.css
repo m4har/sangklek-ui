@@ -84,3 +84,11 @@
 @media (prefers-reduced-motion: reduce) {
   @keyframes shimmer { 0%, 100% { transform: translateX(0); } }
 }
+
+/* RuleRail replaces the native page scrollbar: hide it only while a rail is mounted. */
+html[data-rule-rail] {
+  scrollbar-width: none;
+}
+html[data-rule-rail]::-webkit-scrollbar {
+  display: none;
+}
