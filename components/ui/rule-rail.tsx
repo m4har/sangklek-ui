@@ -175,7 +175,7 @@ function RuleRail({
       </div>
 
       {/* Needle: current scroll position */}
-      <div aria-hidden="true" className="absolute inset-x-0" style={{ top: topOffset + (doc.vh - topOffset) * pct, height: 0 }}>
+      <div aria-hidden="true" className="absolute inset-x-0" style={{ top: topOffset + pct * (doc.vh - topOffset), height: 0 }}>
         <span
           className="absolute inset-x-0 block bg-accent"
           style={{ top: 0, height: 1, boxShadow: "0 0 6px var(--accent)" }}
@@ -186,11 +186,12 @@ function RuleRail({
       </div>
 
       {trackCursor && cursorY !== null ? (
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 block bg-accent/60"
-          style={{ top: cursorY - ref.current!.getBoundingClientRect().top, height: 1 }}
-        />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0" style={{ top: cursorY - (ref.current?.getBoundingClientRect().top ?? 0), height: 0 }}>
+          <span className="absolute inset-x-0 block bg-accent" style={{ top: 0, height: 1, boxShadow: "0 0 6px var(--accent)" }} />
+          <span className="absolute -translate-y-1/2 font-mono text-[9px] font-bold text-accent" style={{ [grow]: 22, top: 0, letterSpacing: "0.08em" }}>
+            {String(Math.round(((cursorY - (ref.current?.getBoundingClientRect().top ?? 0)) / Math.max(1, doc.vh)) * 100)).padStart(3, "0")}
+          </span>
+        </div>
       ) : null}
     </div>
   )
