@@ -104,7 +104,7 @@ import { AdminShell } from "@/components/dashboard/admin-shell"
 ## Component catalog
 
 `components/ui` — primitives
-`Button` · `Badge` · `Card` · `Input` / `Textarea` · `Label` · `Field` / `FieldLabel` · `Table` · `Navbar` / `Footer` · `Frame` / `Tick` / `Eyebrow` / `SectionHeading` / `Lead`
+`Button` · `Badge` · `Card` · `Input` / `Textarea` · `Label` · `Field` / `FieldLabel` · `Table` · `Navbar` / `Footer` · `Frame` / `Tick` / `Eyebrow` / `SectionHeading` / `Lead` · `Rule` (cm/inch industrial ruler)
 
 `components/landing` — public page blocks
 `Hero` · `AppGrid` / `AppCard` · `Features` / `CtaBand`
@@ -128,6 +128,7 @@ npm run typecheck
 - `"use client"` appears only in components that genuinely need state (`Navbar`, `DataTable`, `AdminShell`). Everything else is server-renderable.
 - `BarSeries` deliberately ships with no chart dependency. Swap in a library when you need axes and zoom.
 - Every component accepts `className` and merges it through `cn()` (clsx + tailwind-merge), so Tailwind utility overrides always win in the right order.
+- `Rule` renders a cm/inch ruler from a CSS tick gradient — no chart dependency. Accuracy is `ppi`-based (default 96dpi, CSS `cm`/`in`); pass `ppi` to calibrate. `AdminShell` exposes `ruleUnit` to render it under the console header.
 
 ## License
 

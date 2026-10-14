@@ -3,6 +3,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Rule } from "@/components/ui/rule"
 import {
   ButtonDemo, BadgeDemo, InputDemo, CardDemo, TableDemo,
   SectionDemo, NavbarDemo, StatDemo, BarDemo, LabelDemo,
@@ -170,6 +171,43 @@ import { Input } from "@/components/ui/input"
         <CardHeader><CardTitle>Sticky layout</CardTitle></CardHeader>
         <CardContent>Below 1024px the sidebar becomes an off-canvas drawer opened with the hamburger button. On desktop it stays sticky at full height.</CardContent>
       </Card>
+    ),
+  },
+  {
+    title: "Rule",
+    desc: "Industrial cm/inch measurement ruler. Repeating tick gradient + HUD labels. No chart dep.",
+    props: [
+      { name: "unit", type: '"cm" | "in"', note: "default cm" },
+      { name: "orientation", type: '"horizontal" | "vertical"', note: "default horizontal" },
+      { name: "ppi", type: "number", note: "calibrate display; 96 = CSS default" },
+      { name: "length", type: "number", note: "cap in units; omit to fill container" },
+      { name: "offset", type: "number", note: "numbering offset for continuation" },
+      { name: "flip", type: "boolean", note: "mirror the tick side" },
+      { name: "hideLabels", type: "boolean" },
+      { name: "trackCursor", type: "boolean", note: "live readout under cursor" },
+    ],
+    code: `import { Rule } from "@/components/ui/rule"
+
+// Sticky top rule on the main layout, inches
+<Rule unit="in" trackCursor className="border-x border-border" />
+
+// Vertical rail along the edge
+<Rule unit="cm" orientation="vertical" />`,
+    demo: (
+      <div className="flex flex-col gap-6">
+        <div>
+          <Label className="mb-1 block">cm</Label>
+          <Rule unit="cm" length={30} trackCursor className="border border-border" />
+        </div>
+        <div>
+          <Label className="mb-1 block">in</Label>
+          <Rule unit="in" length={12} trackCursor className="border border-border" />
+        </div>
+        <div className="flex items-end gap-4">
+          <Rule unit="cm" orientation="vertical" length={20} className="border border-border" />
+          <p className="text-sm text-muted-foreground">Vertical orientation renders the same tick gradient rotated.</p>
+        </div>
+      </div>
     ),
   },
 ]

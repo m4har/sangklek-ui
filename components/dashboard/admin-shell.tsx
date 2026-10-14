@@ -3,6 +3,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
+import { Rule } from "@/components/ui/rule"
 
 export type SidebarItem = { label: string; href: string; icon?: React.ReactNode; active?: boolean }
 
@@ -17,6 +18,7 @@ function AdminShell({
   actions,
   children,
   className,
+  ruleUnit,
 }: {
   brand?: string
   items: SidebarItem[]
@@ -24,6 +26,8 @@ function AdminShell({
   actions?: React.ReactNode
   children: React.ReactNode
   className?: string
+  /** Optional measurement rule under the header. Omit for no ruler. */
+  ruleUnit?: import("@/components/ui/rule").RuleUnit
 }) {
   const [open, setOpen] = React.useState(false)
   const panelId = "admin-shell-nav"
@@ -114,6 +118,11 @@ function AdminShell({
           </div>
           <div className="flex shrink-0 items-center gap-2">{actions}</div>
         </header>
+        {ruleUnit ? (
+          <div className="sticky top-12 z-20 border-b border-border bg-background/95 backdrop-blur-sm">
+            <Rule unit={ruleUnit} trackCursor className="mx-auto w-full max-w-[1280px] border-x border-border" />
+          </div>
+        ) : null}
         <main className="flex-1 p-6">{children}</main>
         <Label className="border-t border-border px-6 py-3 text-muted-foreground/60">{brand} · admin</Label>
       </div>
