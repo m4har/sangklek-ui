@@ -25,7 +25,7 @@ import { StatCard, BarSeries } from "@/components/dashboard/stat-card"
 
 export function ButtonDemo() {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       <Button>Primary</Button>
       <Button variant="outline">Outline</Button>
       <Button variant="secondary">Secondary</Button>
@@ -34,6 +34,9 @@ export function ButtonDemo() {
       <Button variant="link">Link</Button>
       <Button size="sm">Small</Button>
       <Button size="lg">Large</Button>
+      <Button iconLeft="◂">Icon left</Button>
+      <Button iconRight="▸">Icon right</Button>
+      <Button loading>Processing</Button>
       <Button disabled>Disabled</Button>
     </div>
   )

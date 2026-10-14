@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Rule } from "@/components/ui/rule"
+import { Skeleton, SkeletonText } from "@/components/ui/skeleton"
 import {
   ButtonDemo, BadgeDemo, InputDemo, CardDemo, TableDemo,
   SectionDemo, NavbarDemo, StatDemo, BarDemo, LabelDemo,
@@ -25,13 +26,16 @@ const BLOCKS: Block[] = [
       { name: "variant", type: 'default | "outline" | "secondary" | "ghost" | "destructive" | "link"' },
       { name: "size", type: 'default | "sm" | "lg" | "icon"' },
       { name: "asChild", type: "boolean", note: "Radix Slot to wrap a link" },
+      { name: "loading", type: "boolean", note: "spinner + blocked interaction" },
+      { name: "iconLeft / iconRight", type: "ReactNode", note: "slot rendered before/after the label" },
     ],
     code: `import { Button } from "@/components/ui/button"
 
 <Button variant="outline" size="sm">Edit</Button>
 <Button asChild>
   <a href="/login">Sign in</a>
-</Button>`,
+</Button>
+<Button iconLeft={<PlusIcon />} loading>Save</Button>`,
     demo: <ButtonDemo />,
   },
   {
@@ -175,7 +179,7 @@ import { Input } from "@/components/ui/input"
   },
   {
     title: "Rule",
-    desc: "Industrial cm/inch measurement ruler. Repeating tick gradient + HUD labels. No chart dep.",
+    desc: "Industrial cm/inch measurement ruler. Tick gradient + HUD labels + cursor/scroll readout. No chart dep.",
     props: [
       { name: "unit", type: '"cm" | "in"', note: "default cm" },
       { name: "orientation", type: '"horizontal" | "vertical"', note: "default horizontal" },
@@ -184,29 +188,60 @@ import { Input } from "@/components/ui/input"
       { name: "offset", type: "number", note: "numbering offset for continuation" },
       { name: "flip", type: "boolean", note: "mirror the tick side" },
       { name: "hideLabels", type: "boolean" },
-      { name: "trackCursor", type: "boolean", note: "live readout under cursor" },
+      { name: "trackCursor", type: "boolean", note: "live readout follows the pointer" },
+      { name: "scrollTarget", type: '"self" | selector', note: "readout tracks scroll position of an ancestor" },
     ],
     code: `import { Rule } from "@/components/ui/rule"
 
 // Sticky top rule on the main layout, inches
 <Rule unit="in" trackCursor className="border-x border-border" />
 
-// Vertical rail along the edge
-<Rule unit="cm" orientation="vertical" />`,
+// Vertical rail that mirrors the page scroll position
+<Rule unit="cm" orientation="vertical" scrollTarget="self" />`,
     demo: (
       <div className="flex flex-col gap-6">
         <div>
-          <Label className="mb-1 block">cm</Label>
+          <Label className="mb-1 block">cm — cursor readout</Label>
           <Rule unit="cm" length={30} trackCursor className="border border-border" />
         </div>
         <div>
-          <Label className="mb-1 block">in</Label>
+          <Label className="mb-1 block">in — cursor readout</Label>
           <Rule unit="in" length={12} trackCursor className="border border-border" />
         </div>
-        <div className="flex items-end gap-4">
-          <Rule unit="cm" orientation="vertical" length={20} className="border border-border" />
-          <p className="text-sm text-muted-foreground">Vertical orientation renders the same tick gradient rotated.</p>
+        <div className="flex items-start gap-4">
+          <div className="h-[240px] overflow-y-auto border border-border p-2">
+            <div className="h-[640px]" />
+          </div>
+          <Rule unit="cm" orientation="vertical" className="h-[240px] border border-border" scrollTarget="self" />
+          <p className="max-w-xs text-sm text-muted-foreground">
+            Vertical rule bound to <code className="font-mono text-xs">scrollTarget="self"</code>: the accent origin marker
+            and cm readout ride along with the scroll position of the overflow ancestor.
+          </p>
         </div>
+      </div>
+    ),
+  },
+  {
+    title: "Skeleton",
+    desc: "Shimmer placeholder. Pure CSS band — no JS, no deps. Use for content with a known shape.",
+    props: [
+      { name: "className", type: "string" },
+      { name: "lines", type: "number", note: "SkeletonText: how many bars, last one shorter" },
+    ],
+    code: `import { Skeleton, SkeletonText } from "@/components/ui/skeleton"
+
+<Skeleton className="h-16 w-40" />
+<SkeletonText lines={3} />`,
+    demo: (
+      <div className="flex flex-col gap-6">
+        <div className="flex items-center gap-3">
+          <Skeleton className="size-10" />
+          <div className="flex flex-col gap-1.5">
+            <Skeleton className="h-3 w-32" />
+            <Skeleton className="h-3 w-20" />
+          </div>
+        </div>
+        <SkeletonText lines={4} />
       </div>
     ),
   },

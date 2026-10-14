@@ -48,6 +48,7 @@
 }
 
 @theme inline {
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
   --color-background: var(--background);
   --color-card: var(--card);
   --color-muted: var(--muted);
@@ -74,4 +75,12 @@
 @layer base {
   * { @apply border-border outline-ring/50; }
   body { @apply bg-background text-foreground font-sans antialiased; }
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes shimmer { 0%, 100% { transform: translateX(0); } }
 }

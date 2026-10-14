@@ -41,6 +41,19 @@ export interface RuleProps extends React.ComponentProps<"div"> {
   hideLabels?: boolean
   /** Show a live cursor readout in the corner. */
   trackCursor?: boolean
+  /**
+   * Follow the scroll position of a scrollable ancestor.
+   * - vertical: cm readout tracks the element's scrollTop
+   * - horizontal: offset tracks the element's scrollLeft
+   * "self" resolves the nearest scrollable parent at runtime.
+   */
+  scrollTarget?: "self" | string
+}
+
+function resolveScroller(target: HTMLElement | null): HTMLElement {
+  if (!target) return document.documentElement
+  const found = target.closest<HTMLElement>("[class*='overflow-auto'], [class*='overflow-scroll'], [style*='overflow']")
+  return found ?? target
 }
 
 /**
@@ -57,6 +70,7 @@ function Rule({
   flip = false,
   hideLabels = false,
   trackCursor = false,
+  scrollTarget,
   className,
   style,
   ...props
@@ -76,6 +90,20 @@ function Rule({
     ro.observe(el)
     return () => ro.disconnect()
   }, [orientation])
+
+  // Scroll tracking: readout/origin follows a scrollable ancestor.
+  const [scroll, setScroll] = React.useState(0)
+  React.useEffect(() => {
+    if (!scrollTarget) return
+    const targetEl =
+      scrollTarget === "self" ? (ref.current?.parentElement ?? null) : (document.querySelector(scrollTarget) as HTMLElement | null)
+    const scroller = resolveScroller(targetEl)
+    const isWindow = scroller === document.documentElement
+    const onScroll = () => setScroll(isWindow ? window.scrollY : scroller.scrollTop)
+    onScroll()
+    scroller.addEventListener("scroll", onScroll, { passive: true })
+    return () => scroller.removeEventListener("scroll", onScroll)
+  }, [scrollTarget])
 
   const spec = SPEC[unit]
   const pxPerUnit = spec.perPx(ppi)
@@ -105,6 +133,9 @@ function Rule({
   // Explicit mid + major ticks over the minor gradient.
   const majors: { n: number; v: number }[] = []
   const mids: { n: number; v: number }[] = []
+  // Scroll shifts the visible numbering window: origin marker rides along.
+  const scrollUnits = scrollTarget ? Math.max(0, scroll / pxPerUnit - offset) : 0
+  const scrollVisible = scrollTarget && scrollUnits > 0
   for (let i = 0; i <= count; i++) {
     const v = offset + i * spec.minor
     const vR = Math.round(v * 1000) / 1000
@@ -191,8 +222,22 @@ function Rule({
             : cn("h-[2px]", flip ? "right-0 w-[18px]" : "left-0 w-[18px]"),
           orientation === "horizontal" ? "top-0" : "left-0"
         )}
-        style={{ [orientation === "horizontal" ? "left" : "top"]: offset * pxPerUnit }}
+        style={{ [orientation === "horizontal" ? "left" : "top"]: scrollVisible ? 0 : offset * pxPerUnit }}
       />
+      {scrollVisible ? (
+        <span
+          aria-hidden="true"
+          className={cn(
+            "pointer-events-none absolute z-10 flex items-center gap-1 px-1.5 py-0.5 bg-background/85 border border-border backdrop-blur",
+            orientation === "horizontal" ? cn("left-2", flip ? "bottom-0.5" : "top-0.5") : cn("top-2", flip ? "left-0.5" : "right-0.5")
+          )}
+        >
+          <span className="block size-1.5 bg-accent" />
+          <span className="font-mono text-[10px] font-bold tracking-[0.08em] text-foreground/80">
+            {Math.round((scroll / pxPerUnit) * 100) / 100} {unit}
+          </span>
+        </span>
+      ) : null}
       {trackCursor ? (
         <span
           className={cn(
