@@ -1,0 +1,192 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "sangklek-ui",
+  "homepage": "https://github.com/m4har/sangklek-ui",
+  "items": [
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "Utils",
+      "description": "Class name merge helper (cn)",
+      "files": [
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Press/loading/icon button",
+      "files": [
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Status badge",
+      "files": [
+        {
+          "path": "components/ui/badge.tsx",
+          "type": "registry:ui",
+          "target": "@ui/badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Bordered card with crop-mark corners",
+      "files": [
+        {
+          "path": "components/ui/card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Text input",
+      "files": [
+        {
+          "path": "components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "HUD monospace label",
+      "files": [
+        {
+          "path": "components/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "@ui/label.tsx"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Form field wrapper",
+      "files": [
+        {
+          "path": "components/ui/field.tsx",
+          "type": "registry:ui",
+          "target": "@ui/field.tsx"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Bordered data table",
+      "files": [
+        {
+          "path": "components/ui/table.tsx",
+          "type": "registry:ui",
+          "target": "@ui/table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Shimmer skeleton and text placeholder",
+      "files": [
+        {
+          "path": "components/ui/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "@ui/skeleton.tsx"
+        }
+      ]
+    },
+    {
+      "name": "section",
+      "type": "registry:ui",
+      "title": "Section",
+      "description": "Section with corner ticks",
+      "files": [
+        {
+          "path": "components/ui/section.tsx",
+          "type": "registry:ui",
+          "target": "@ui/section.tsx"
+        }
+      ]
+    },
+    {
+      "name": "rule",
+      "type": "registry:ui",
+      "title": "Rule",
+      "description": "Measurement rule (cm/in) horizontal or vertical",
+      "files": [
+        {
+          "path": "components/ui/rule.tsx",
+          "type": "registry:ui",
+          "target": "@ui/rule.tsx"
+        }
+      ]
+    },
+    {
+      "name": "rule-rail",
+      "type": "registry:ui",
+      "title": "RuleRail",
+      "description": "Fixed right rail, gridcraft-style",
+      "files": [
+        {
+          "path": "components/ui/rule-rail.tsx",
+          "type": "registry:ui",
+          "target": "@ui/rule-rail.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navbar",
+      "type": "registry:ui",
+      "title": "Navbar",
+      "description": "Top navbar",
+      "files": [
+        {
+          "path": "components/ui/navbar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/navbar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "globals-css",
+      "type": "registry:ui",
+      "title": "Globals CSS",
+      "description": "Tokens, fonts, theme, shimmer keyframes",
+      "files": [
+        {
+          "path": "app/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        }
+      ]
+    }
+  ]
+}
